@@ -1,17 +1,12 @@
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import {StyleSheet, SafeAreaView} from 'react-native';
 import React from 'react';
 import WelcomeScreen from './src/screens/WelcomeScreen';
+import CreateCharacter from './src/screens/CreateCharacter';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.main}>
-      <WelcomeScreen />
+      <CreateCharacter />
     </SafeAreaView>
   );
 };
