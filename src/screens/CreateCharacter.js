@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -11,6 +11,8 @@ import {
 import MainButton from '../components/MainButton';
 
 const CreateCharacter = () => {
+  const [characterName, setCharacterName] = useState('');
+
   return (
     <View style={styles.a}>
       <View style={styles.logo}>
@@ -26,8 +28,13 @@ const CreateCharacter = () => {
         </View>
       </View>
       <View style={styles.viewCriarPerso}>
-        <Text style={styles.labelViewCriarPerso}>Criar Personagem </Text>
-        <TextInput style={styles.input} placeholder="Nome do personagem" />
+        <Text style={styles.labelViewCriarPerso}>Criar Personagem</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Nome do personagem"
+          value={characterName}
+          onChangeText={text => setCharacterName(text)}
+        />
       </View>
       <View>
         <Text style={styles.labelFaccao}>Facção</Text>
@@ -159,6 +166,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: 115,
     height: 150,
+  },
+  imgNavioOnPress: {
+    backgroundColor: '#402A07',
   },
   novoAlguma: {
     width: 50,

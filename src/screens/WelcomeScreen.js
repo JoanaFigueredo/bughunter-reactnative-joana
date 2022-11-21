@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   textBemVindo: {
     fontSize: 40,
     color: 'white',
-    width: 350,
+    width: 350, 
     textAlign: 'center',
   },
   text: {

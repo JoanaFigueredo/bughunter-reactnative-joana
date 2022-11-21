@@ -2,6 +2,7 @@ import {StyleSheet, SafeAreaView} from 'react-native';
 import React from 'react';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import CreateCharacter from './src/screens/CreateCharacter';
+import SingIn from './src/screens/SingIn';
 
 const App = () => {
   return (
