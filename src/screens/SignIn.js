@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import MainButton from '../components/MainButton';
+import logo from '../assets/images/logo.png';
 
 const SignIn = () => {
   return (
@@ -19,18 +20,14 @@ const SignIn = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.logo}>
-        <Image
-          source={require('../assets/images/logo.png')}
-          resizeMode="contain"
-          style={styles.logoLabel}
-        />
+        <Image source={logo} resizeMode="contain" style={styles.logoLabel} />
         <Text style={styles.textBH}>Bug Hunter</Text>
       </View>
       <View style={styles.viewSingIn}>
         <Text style={styles.labelViewSingIn}>Entrar</Text>
       </View>
-      <View>
-        <TextInput style={styles.input} placeholder="Nome do personagem" />
+      <View style={styles.input}>
+        <TextInput style={styles.inputLabel} placeholder="Nome do personagem" />
       </View>
       <View style={styles.btnSingIn}>
         <MainButton title="Entrar" />
@@ -88,11 +85,13 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: '#D9D9D9',
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
-    paddingHorizontal: 10,
     marginLeft: 30,
     marginTop: 20,
+  },
+  inputLabel: {
+    paddingHorizontal: 10,
   },
   btnSingIn: {
     flex: 1,
