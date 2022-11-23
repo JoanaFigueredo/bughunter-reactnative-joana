@@ -1,9 +1,17 @@
 import React from 'react';
 import {TouchableOpacity, Image, View, Text, StyleSheet} from 'react-native';
 
-export const FactionButton = ({image, label, borderColor}) => {
+export const FactionButton = ({image, label, color, isSelected, ...props}) => {
   return (
-    <TouchableOpacity style={[styles.imgFac, {borderColor}]}>
+    <TouchableOpacity
+      style={[
+        styles.imgFac,
+        {
+          borderColor: color,
+          backgroundColor: isSelected ? color : 'transparent',
+        },
+      ]}
+      {...props}>
       <Image source={image} resizeMode="contain" style={styles.pictureSize} />
       <View style={styles.textView}>
         <Text style={styles.nameFac}>{label}</Text>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -12,9 +12,17 @@ import MainButton from '../components/MainButton';
 import cross from '../assets/images/cross.png';
 import hat from '../assets/images/helmet.png';
 import ship from '../assets/images/boat.png';
+import logo from '../assets/images/logo.png';
 import {FactionButton} from '../components/FactionButton';
 
 const CreateCharacter = () => {
+  const [characterName, setCharacterName] = useState('');
+  const [factionSelected, setFactionSelected] = useState('');
+
+  const create = () => {
+    console.log(characterName, factionSelected);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
@@ -22,27 +30,44 @@ const CreateCharacter = () => {
           <Text style={styles.btnLabel}> - </Text>
         </TouchableOpacity>
         <View style={styles.imgView}>
-          <Image
-            source={require('../assets/images/logo.png')}
-            resizeMode="contain"
-            style={styles.logoLabel}
-          />
+          <Image source={logo} resizeMode="contain" style={styles.logoLabel} />
         </View>
       </View>
       <View style={styles.viewCreateCharacter}>
         <Text style={styles.labelViewCreateCharacter}>Criar Personagem </Text>
-        <TextInput style={styles.input} placeholder="Nome do personagem" />
+        <TextInput
+          style={styles.input}
+          placeholder="Nome do personagem"
+          value={characterName}
+          onChangeText={text => setCharacterName(text)}
+        />
       </View>
-      <View>
-        <Text style={styles.labelFaction}>Facção</Text>
-      </View>
+      <Text style={styles.labelFaction}>Facção</Text>
       <View style={styles.images}>
-        <FactionButton image={cross} borderColor={'#38116A'} label={'Front'} />
-        <FactionButton image={hat} borderColor={'#132109'} label={'Mobile'} />
-        <FactionButton image={ship} borderColor={'#402A07'} label={'Backend'} />
+        <FactionButton
+          image={cross}
+          color={'#38116A'}
+          label={'Front'}
+          isSelected={factionSelected === 'front'}
+          onPress={() => setFactionSelected('front')}
+        />
+        <FactionButton
+          image={hat}
+          color={'#132109'}
+          label={'Mobile'}
+          isSelected={factionSelected === 'mobile'}
+          onPress={() => setFactionSelected('mobile')}
+        />
+        <FactionButton
+          image={ship}
+          color={'#402A07'}
+          label={'Backend'}
+          isSelected={factionSelected === 'backend'}
+          onPress={() => setFactionSelected('backend')}
+        />
       </View>
       <View style={styles.btnCreate}>
-        <MainButton title="Criar" />
+        <MainButton title="Criar" onPress={create} />
       </View>
     </View>
   );
