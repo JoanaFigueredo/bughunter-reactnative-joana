@@ -9,26 +9,32 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import MainButton from '../components/MainButton';
+import cross from '../assets/images/cross.png';
+import hat from '../assets/images/helmet.png';
+import ship from '../assets/images/boat.png';
+import logo from '../assets/images/logo.png';
+import {FactionButton} from '../components/FactionButton';
 
 const CreateCharacter = () => {
   const [characterName, setCharacterName] = useState('');
+  const [factionSelected, setFactionSelected] = useState('');
+
+  const create = () => {
+    console.log(characterName, factionSelected);
+  };
 
   return (
-    <View style={styles.a}>
+    <View style={styles.container}>
       <View style={styles.logo}>
         <TouchableOpacity style={styles.btn}>
           <Text style={styles.btnLabel}> - </Text>
         </TouchableOpacity>
         <View style={styles.imgView}>
-          <Image
-            source={require('../assets/images/logo.png')}
-            resizeMode="contain"
-            style={styles.logoLabel}
-          />
+          <Image source={logo} resizeMode="contain" style={styles.logoLabel} />
         </View>
       </View>
-      <View style={styles.viewCriarPerso}>
-        <Text style={styles.labelViewCriarPerso}>Criar Personagem</Text>
+      <View style={styles.viewCreateCharacter}>
+        <Text style={styles.labelViewCreateCharacter}>Criar Personagem </Text>
         <TextInput
           style={styles.input}
           placeholder="Nome do personagem"
@@ -36,43 +42,32 @@ const CreateCharacter = () => {
           onChangeText={text => setCharacterName(text)}
         />
       </View>
-      <View>
-        <Text style={styles.labelFaccao}>Facção</Text>
+      <Text style={styles.labelFaction}>Facção</Text>
+      <View style={styles.images}>
+        <FactionButton
+          image={cross}
+          color={'#38116A'}
+          label={'Front'}
+          isSelected={factionSelected === 'front'}
+          onPress={() => setFactionSelected('front')}
+        />
+        <FactionButton
+          image={hat}
+          color={'#132109'}
+          label={'Mobile'}
+          isSelected={factionSelected === 'mobile'}
+          onPress={() => setFactionSelected('mobile')}
+        />
+        <FactionButton
+          image={ship}
+          color={'#402A07'}
+          label={'Backend'}
+          isSelected={factionSelected === 'backend'}
+          onPress={() => setFactionSelected('backend')}
+        />
       </View>
-      <View style={styles.imagens}>
-        <TouchableOpacity style={styles.imgCruz}>
-          <Image
-            source={require('../assets/images/cross.png')}
-            resizeMode="contain"
-            style={styles.novoAlguma}
-          />
-          <View style={styles.textView}>
-            <Text style={styles.vochora}>Front</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.imgChapeu}>
-          <Image
-            source={require('../assets/images/helmet.png')}
-            resizeMode="contain"
-            style={styles.novoAlguma}
-          />
-          <View style={styles.textView}>
-            <Text style={styles.vochora}>Mobile</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.imgNavio}>
-          <Image
-            source={require('../assets/images/boat.png')}
-            resizeMode="contain"
-            style={styles.novoAlguma}
-          />
-          <View style={styles.textView}>
-            <Text style={styles.vochora}>Backend</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.btnCriar}>
-        <MainButton title="Criar" />
+      <View style={styles.btnCreate}>
+        <MainButton title="Criar" onPress={create} />
       </View>
     </View>
   );
@@ -81,7 +76,7 @@ const CreateCharacter = () => {
 export default CreateCharacter;
 
 const styles = StyleSheet.create({
-  a: {
+  container: {
     flex: 1,
     margin: 10,
   },
@@ -111,10 +106,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
   },
-  viewCriarPerso: {
+  viewCreateCharacter: {
     alignItems: 'flex-start',
   },
-  labelViewCriarPerso: {
+  labelViewCreateCharacter: {
     fontWeight: 'bold',
     fontSize: 50,
     color: 'white',
@@ -129,61 +124,18 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 10,
   },
-  labelFaccao: {
+  labelFaction: {
     marginTop: 30,
     fontSize: 32,
     color: 'white',
   },
-  imagens: {
+  images: {
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginTop: 20,
   },
-  imgCruz: {
-    borderWidth: 2,
-    borderColor: '#38116A',
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: 115,
-    height: 150,
-  },
-  imgChapeu: {
-    borderWidth: 2,
-    borderColor: '#132109',
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: 115,
-    height: 150,
-  },
-  imgNavio: {
-    borderWidth: 2,
-    borderColor: '#402A07',
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: 115,
-    height: 150,
-  },
-  imgNavioOnPress: {
-    backgroundColor: '#402A07',
-  },
-  novoAlguma: {
-    width: 50,
-    height: 90,
-  },
-  vochora: {
-    color: 'white',
-    fontSize: 16,
-  },
-  textView: {
-    alignSelf: 'center',
-    width: '100%',
-    alignItems: 'center',
-  },
-  btnCriar: {
+  btnCreate: {
     flex: 1,
     paddingHorizontal: 20,
     justifyContent: 'flex-end',
