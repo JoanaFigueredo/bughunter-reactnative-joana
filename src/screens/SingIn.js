@@ -12,7 +12,7 @@ import MainButton from '../components/MainButton';
 
 const SingIn = () => {
   return (
-    <View style={styles.a}>
+    <View style={styles.container}>
       <View style={styles.button}>
         <TouchableOpacity style={styles.btn}>
           <Text style={styles.btnLabel}> - </Text>
@@ -26,13 +26,13 @@ const SingIn = () => {
         />
         <Text style={styles.textBH}>Bug Hunter</Text>
       </View>
-      <View style={styles.viewEntrar}>
-        <Text style={styles.labelVierEntrar}>Entrar</Text>
+      <View style={styles.viewSingIn}>
+        <Text style={styles.labelViewSingIn}>Entrar</Text>
       </View>
       <View>
         <TextInput style={styles.input} placeholder="Nome do personagem" />
       </View>
-      <View style={styles.btnEntrar}>
+      <View style={styles.btnSingIn}>
         <MainButton title="Entrar" />
       </View>
     </View>
@@ -42,7 +42,7 @@ const SingIn = () => {
 export default SingIn;
 
 const styles = StyleSheet.create({
-  a: {
+  container: {
     flex: 1,
   },
   btn: {
@@ -73,12 +73,12 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: 'white',
   },
-  viewEntrar: {
+  viewSingIn: {
     alignItems: 'flex-start',
     marginTop: 60,
     marginLeft: 30,
   },
-  labelVierEntrar: {
+  labelViewSingIn: {
     fontWeight: 'bold',
     fontSize: 45,
     color: 'white',
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginTop: 20,
   },
-  btnEntrar: {
+  btnSingIn: {
     flex: 1,
     paddingHorizontal: 30,
     justifyContent: 'flex-end',
