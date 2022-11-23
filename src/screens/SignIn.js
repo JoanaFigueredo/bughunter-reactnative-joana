@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import MainButton from '../components/MainButton';
 
-const SingIn = () => {
+const SignIn = () => {
   return (
     <View style={styles.container}>
       <View style={styles.button}>
@@ -39,7 +39,7 @@ const SingIn = () => {
   );
 };
 
-export default SingIn;
+export default SignIn;
 
 const styles = StyleSheet.create({
   container: {
