@@ -15,7 +15,7 @@ import ship from '../assets/images/boat.png';
 import logo from '../assets/images/logo.png';
 import {FactionButton} from '../components/FactionButton';
 
-const CreateCharacter = () => {
+const CreateCharacter = ({navigation, route}) => {
   const [characterName, setCharacterName] = useState('');
   const [factionSelected, setFactionSelected] = useState('');
 
