@@ -7,38 +7,48 @@ import {
   TextInput,
   TouchableOpacity,
   Platform,
+  SafeAreaView,
 } from 'react-native';
 import MainButton from '../components/MainButton';
 import logo from '../assets/images/logo.png';
 
-const SignIn = () => {
+const SignIn = ({navigation}) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.button}>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnLabel}> - </Text>
-        </TouchableOpacity>
+    <SafeAreaView style={styles.main}>
+      <View style={styles.container}>
+        <View style={styles.button}>
+          <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
+            <Text style={styles.btnLabel}> - </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.logo}>
+          <Image source={logo} resizeMode="contain" style={styles.logoLabel} />
+          <Text style={styles.textBH}>Bug Hunter</Text>
+        </View>
+        <View style={styles.viewSingIn}>
+          <Text style={styles.labelViewSingIn}>Entrar</Text>
+        </View>
+        <View style={styles.input}>
+          <TextInput
+            style={styles.inputLabel}
+            placeholder="Nome do personagem"
+          />
+        </View>
+        <View style={styles.btnSingIn}>
+          <MainButton title="Entrar" />
+        </View>
       </View>
-      <View style={styles.logo}>
-        <Image source={logo} resizeMode="contain" style={styles.logoLabel} />
-        <Text style={styles.textBH}>Bug Hunter</Text>
-      </View>
-      <View style={styles.viewSingIn}>
-        <Text style={styles.labelViewSingIn}>Entrar</Text>
-      </View>
-      <View style={styles.input}>
-        <TextInput style={styles.inputLabel} placeholder="Nome do personagem" />
-      </View>
-      <View style={styles.btnSingIn}>
-        <MainButton title="Entrar" />
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default SignIn;
 
 const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    backgroundColor: '#11081A',
+  },
   container: {
     flex: 1,
   },

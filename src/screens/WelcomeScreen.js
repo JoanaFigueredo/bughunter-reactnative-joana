@@ -10,7 +10,7 @@ import {
 import MainButton from '../components/MainButton';
 import SecondButton from '../components/SecondButton';
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
@@ -34,8 +34,11 @@ const WelcomeScreen = () => {
           </View>
         </View>
         <View style={styles.footer}>
-          <MainButton title="Nova jornada" onPress={() => console.log('Opa')} />
-          <SecondButton />
+          <MainButton
+            title="Nova jornada"
+            onPress={() => navigation.navigate('createCharacter')}
+          />
+          <SecondButton onPress={() => navigation.navigate('signIn')} />
         </View>
       </View>
     </SafeAreaView>

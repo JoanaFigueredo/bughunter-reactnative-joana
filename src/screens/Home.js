@@ -15,87 +15,89 @@ import heart from '../assets/images/icon-heart.png';
 import treasure from '../assets/images/treasure.png';
 import quest from '../assets/images/quest.png';
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <SafeAreaView style={styles.main}>
-      <View style={styles.container}>
-        <View style={styles.logo}>
-          <TouchableOpacity style={styles.btn}>
-            <Text style={styles.btnLabel}> - </Text>
-          </TouchableOpacity>
-          <View style={styles.imgView}>
-            <Image
-              source={logo}
-              resizeMode="contain"
-              style={styles.logoLabel}
-            />
-          </View>
-        </View>
-        <View style={styles.nameCharacter}>
-          <Text style={styles.labelNameCharacter}>Richarlison Pombo</Text>
-          <View style={styles.coinCash}>
-            <Image
-              source={coin}
-              resizeMode="contain"
-              style={styles.coinLabel}
-            />
-            <Text style={styles.cash}>409</Text>
-          </View>
-        </View>
-        <View style={styles.viewSection}>
-          <View style={styles.section}>
-            <View style={styles.figureText}>
+      <SafeAreaView style={styles.main}>
+        <View style={styles.container}>
+          <View style={styles.logo}>
+            <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
+              <Text style={styles.btnLabel}> - </Text>
+            </TouchableOpacity>
+            <View style={styles.imgView}>
               <Image
-                style={styles.figure}
-                source={sword}
+                source={logo}
+                resizeMode="contain"
+                style={styles.logoLabel}
+              />
+            </View>
+          </View>
+          <View style={styles.nameCharacter}>
+            <Text style={styles.labelNameCharacter}>Richarlison Pombo</Text>
+            <View style={styles.coinCash}>
+              <Image
+                source={coin}
+                resizeMode="contain"
+                style={styles.coinLabel}
+              />
+              <Text style={styles.cash}>409</Text>
+            </View>
+          </View>
+          <View style={styles.viewSection}>
+            <View style={styles.section}>
+              <View style={styles.figureText}>
+                <Image
+                  style={styles.figure}
+                  source={sword}
+                  resizeMode="contain"
+                />
+                <Text style={styles.sectionName}>Ataque</Text>
+              </View>
+              <Text style={styles.value}>100</Text>
+            </View>
+            <View style={styles.sectionMiddle}>
+              <View style={styles.figureText}>
+                <Image
+                  style={styles.figure}
+                  source={shield}
+                  resizeMode="contain"
+                />
+                <Text style={styles.sectionName}>Defesa</Text>
+              </View>
+              <Text style={styles.value}>50</Text>
+            </View>
+            <View style={styles.sectionBottom}>
+              <View style={styles.figureText}>
+                <Image
+                  style={styles.figure}
+                  source={heart}
+                  resizeMode="contain"
+                />
+                <Text style={styles.sectionName}>Vida</Text>
+              </View>
+              <Text style={styles.value}>100</Text>
+            </View>
+          </View>
+          <View style={styles.footer}>
+            <View style={styles.sectionFooter}>
+              <Image
+                style={styles.figureFooter}
+                source={treasure}
                 resizeMode="contain"
               />
-              <Text style={styles.sectionName}>Ataque</Text>
+              <Text style={styles.textFooter}>Loja</Text>
             </View>
-            <Text style={styles.value}>100</Text>
-          </View>
-          <View style={styles.sectionMiddle}>
-            <View style={styles.figureText}>
+            <View style={styles.sectionFooter}>
               <Image
-                style={styles.figure}
-                source={shield}
+                style={styles.figureFooter}
+                source={quest}
                 resizeMode="contain"
               />
-              <Text style={styles.sectionName}>Defesa</Text>
+              <Text style={styles.textFooter}>Quests</Text>
             </View>
-            <Text style={styles.value}>50</Text>
-          </View>
-          <View style={styles.sectionBottom}>
-            <View style={styles.figureText}>
-              <Image
-                style={styles.figure}
-                source={heart}
-                resizeMode="contain"
-              />
-              <Text style={styles.sectionName}>Vida</Text>
-            </View>
-            <Text style={styles.value}>100</Text>
           </View>
         </View>
-        <View style={styles.footer}>
-          <View style={styles.sectionFooter}>
-            <Image
-              style={styles.figureFooter}
-              source={treasure}
-              resizeMode="contain"
-            />
-            <Text style={styles.textFooter}>Loja</Text>
-          </View>
-          <View style={styles.sectionFooter}>
-            <Image
-              style={styles.figureFooter}
-              source={quest}
-              resizeMode="contain"
-            />
-            <Text style={styles.textFooter}>Quests</Text>
-          </View>
-        </View>
-      </View>
+      </SafeAreaView>
     </SafeAreaView>
   );
 };
