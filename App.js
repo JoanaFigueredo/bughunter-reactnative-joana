@@ -3,6 +3,7 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import CreateCharacter from './src/screens/CreateCharacter';
 import SignIn from './src/screens/SignIn';
 import Home from './src/screens/Home';
+import Store from './src/screens/Store';
 import {NavigationContainer, StackActions} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -29,6 +30,7 @@ const AppNavigation = () => {
       screenOptions={{
         headerShown: false,
       }}>
+      <AppStack.Screen name="Store" component={Store} />
       <AppStack.Screen name="Home" component={Home} />
     </AppStack.Navigator>
   );
