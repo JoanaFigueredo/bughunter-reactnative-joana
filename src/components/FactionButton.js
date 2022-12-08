@@ -1,7 +1,27 @@
 import React from 'react';
 import {TouchableOpacity, Image, View, Text, StyleSheet} from 'react-native';
+import cross from '../assets/images/cross.png';
+import hat from '../assets/images/helmet.png';
+import ship from '../assets/images/boat.png';
 
-export const FactionButton = ({image, label, color, isSelected, ...props}) => {
+const factionType = {
+  Frontend: {
+    color: '#38116A',
+    image: cross,
+  },
+  Backend: {
+    color: '#132109',
+    image: hat,
+  },
+  Mobile: {
+    color: '#402A07',
+    image: ship,
+  },
+};
+
+export const FactionButton = ({label, isSelected, ...props}) => {
+  const color = factionType[label].color;
+  const image = factionType[label].image;
   return (
     <TouchableOpacity
       style={[
