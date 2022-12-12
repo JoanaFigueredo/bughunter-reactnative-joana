@@ -22,7 +22,7 @@ const WelcomeScreen = ({navigation}) => {
           />
           <Text style={styles.textBH}>Bug Hunter</Text>
         </View>
-        <View style={styles.algumacoisa}>
+        <View style={styles.containerWelcome}>
           <Text style={styles.textBemVindo}>
             Bem-vindo <Text style={styles.textBold}>Caçador!</Text>
           </Text>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
   },
-  algumacoisa: {
+  containerWelcome: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,

@@ -14,6 +14,9 @@ import shield from '../assets/images/icon-shield.png';
 import heart from '../assets/images/icon-heart.png';
 import treasure from '../assets/images/treasure.png';
 import quest from '../assets/images/quest.png';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {HomeInfo} from '../components/HomeInfo';
+import {HomeFooter} from '../components/HomeFooter';
 
 const Home = ({navigation}) => {
   return (
@@ -21,7 +24,7 @@ const Home = ({navigation}) => {
       <View style={styles.container}>
         <View style={styles.logo}>
           <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
-            <Text style={styles.btnLabel}> - </Text>
+            <Icon name="arrow-left" size={20} color={'white'} />
           </TouchableOpacity>
           <View style={styles.imgView}>
             <Image
@@ -43,57 +46,17 @@ const Home = ({navigation}) => {
           </View>
         </View>
         <View style={styles.viewSection}>
-          <View style={styles.section}>
-            <View style={styles.figureText}>
-              <Image
-                style={styles.figure}
-                source={sword}
-                resizeMode="contain"
-              />
-              <Text style={styles.sectionName}>Ataque</Text>
-            </View>
-            <Text style={styles.value}>100</Text>
-          </View>
-          <View style={styles.sectionMiddle}>
-            <View style={styles.figureText}>
-              <Image
-                style={styles.figure}
-                source={shield}
-                resizeMode="contain"
-              />
-              <Text style={styles.sectionName}>Defesa</Text>
-            </View>
-            <Text style={styles.value}>50</Text>
-          </View>
-          <View style={styles.sectionBottom}>
-            <View style={styles.figureText}>
-              <Image
-                style={styles.figure}
-                source={heart}
-                resizeMode="contain"
-              />
-              <Text style={styles.sectionName}>Vida</Text>
-            </View>
-            <Text style={styles.value}>100</Text>
-          </View>
+          <HomeInfo image={sword} name="Ataque" value="100" hasBorder />
+          <HomeInfo image={shield} name="Defesa" value="50" hasBorder />
+          <HomeInfo image={heart} name="Vida" value="100" />
         </View>
         <View style={styles.footer}>
-          <View style={styles.sectionFooter}>
-            <Image
-              style={styles.figureFooter}
-              source={treasure}
-              resizeMode="contain"
-            />
-            <Text style={styles.textFooter}>Loja</Text>
-          </View>
-          <View style={styles.sectionFooter}>
-            <Image
-              style={styles.figureFooter}
-              source={quest}
-              resizeMode="contain"
-            />
-            <Text style={styles.textFooter}>Quests</Text>
-          </View>
+          <TouchableOpacity onPress={() => navigation.navigate('Store')}>
+            <HomeFooter image={treasure} name={'Loja'} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Quests')}>
+            <HomeFooter image={quest} name={'Quests'} />
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -164,82 +127,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 9,
   },
-  section: {
+  viewSection: {
     backgroundColor: '#2E2635',
-    height: 55,
-    marginBottom: 1,
-    borderTopEndRadius: 10,
-    borderTopStartRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
-    justifyContent: 'space-between',
-  },
-  sectionMiddle: {
-    backgroundColor: '#2E2635',
-    height: 55,
-    marginBottom: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
-    justifyContent: 'space-between',
-  },
-  sectionBottom: {
-    backgroundColor: '#2E2635',
-    height: 55,
-    marginBottom: 1,
-    borderBottomEndRadius: 10,
-    borderBottomStartRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
-    justifyContent: 'space-between',
-  },
-  figureText: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  figure: {
-    width: 28,
-    height: 28,
-    marginRight: 10,
-  },
-  sectionName: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  value: {
-    color: '#3BDA5E',
-    flexDirection: 'row',
-    alignItems: 'center',
-    fontWeight: 'bold',
-    fontSize: 20,
+    borderRadius: 10,
   },
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
-  },
-  sectionFooter: {
-    backgroundColor: '#2E2635',
-    height: 82,
-    width: '100%',
-    marginBottom: 30,
-    borderRadius: 14,
-    paddingHorizontal: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  figureFooter: {
-    width: 100,
-    height: 100,
-    transform: [{translateY: -9}],
-  },
-  textFooter: {
-    color: 'white',
-    fontSize: 30,
-    fontWeight: 'bold',
   },
 });

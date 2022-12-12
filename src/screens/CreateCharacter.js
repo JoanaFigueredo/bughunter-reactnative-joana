@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -8,24 +8,38 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
+  FlatList,
 } from 'react-native';
 import MainButton from '../components/MainButton';
-import cross from '../assets/images/cross.png';
-import hat from '../assets/images/helmet.png';
-import ship from '../assets/images/boat.png';
 import logo from '../assets/images/logo.png';
 import {FactionButton} from '../components/FactionButton';
+import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const CreateCharacter = ({navigation}) => {
   const [characterName, setCharacterName] = useState('');
   const [factionSelected, setFactionSelected] = useState('');
+  const [factions, setFactions] = useState([]);
+
+  useEffect(() => {
+    console.log('funcionando');
+    getFactions();
+  }, []);
+
+  const getFactions = async () => {
+    const response = await axios.get(
+      'https://dws-bug-hunters-api.vercel.app/api/factions',
+    );
+    console.log(response.data);
+    setFactions(response.data);
+  };
 
   return (
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
         <View style={styles.logo}>
           <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
-            <Text style={styles.btnLabel}> - </Text>
+            <Icon name="arrow-left" size={20} color={'white'} />
           </TouchableOpacity>
           <View style={styles.imgView}>
             <Image
@@ -36,7 +50,7 @@ const CreateCharacter = ({navigation}) => {
           </View>
         </View>
         <View style={styles.viewCreateCharacter}>
-          <Text style={styles.labelViewCreateCharacter}>Criar Personagem </Text>
+          <Text style={styles.labelViewCreateCharacter}>Criar Personagem</Text>
           <TextInput
             style={styles.input}
             placeholder="Nome do personagem"
@@ -45,31 +59,23 @@ const CreateCharacter = ({navigation}) => {
           />
         </View>
         <Text style={styles.labelFaction}>Facção</Text>
-        <View style={styles.images}>
-          <FactionButton
-            image={cross}
-            color={'#38116A'}
-            label={'Front'}
-            isSelected={factionSelected === 'front'}
-            onPress={() => setFactionSelected('front')}
-          />
-          <FactionButton
-            image={hat}
-            color={'#132109'}
-            label={'Mobile'}
-            isSelected={factionSelected === 'mobile'}
-            onPress={() => setFactionSelected('mobile')}
-          />
-          <FactionButton
-            image={ship}
-            color={'#402A07'}
-            label={'Backend'}
-            isSelected={factionSelected === 'backend'}
-            onPress={() => setFactionSelected('backend')}
-          />
-        </View>
+        <FlatList
+          contentContainerStyle={styles.flatListContainer}
+          horizontal
+          data={factions}
+          renderItem={({item}) => (
+            <FactionButton
+              label={item.name}
+              onPress={() => setFactionSelected(item.name)}
+              isSelected={factionSelected === item.name}
+            />
+          )}
+        />
         <View style={styles.btnCreate}>
-          <MainButton title="Criar" />
+          <MainButton
+            title="Criar"
+            onPress={() => navigation.navigate('App')}
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -107,6 +113,11 @@ const styles = StyleSheet.create({
     width: 100,
     height: 80,
     paddingLeft: '25%',
+  },
+  flatListContainer: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    marginTop: 15,
   },
   btnLabel: {
     fontWeight: 'bold',

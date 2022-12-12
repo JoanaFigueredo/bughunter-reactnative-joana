@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import MainButton from '../components/MainButton';
 import logo from '../assets/images/logo.png';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SignIn = ({navigation}) => {
   return (
@@ -18,7 +19,7 @@ const SignIn = ({navigation}) => {
       <View style={styles.container}>
         <View style={styles.button}>
           <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
-            <Text style={styles.btnLabel}> - </Text>
+            <Icon name="arrow-left" size={20} color={'white'} />
           </TouchableOpacity>
         </View>
         <View style={styles.logo}>
@@ -35,7 +36,10 @@ const SignIn = ({navigation}) => {
           />
         </View>
         <View style={styles.btnSingIn}>
-          <MainButton title="Entrar" />
+          <MainButton
+            title="Entrar"
+            onPress={() => navigation.navigate('App', {screen: 'Quests'})}
+          />
         </View>
       </View>
     </SafeAreaView>

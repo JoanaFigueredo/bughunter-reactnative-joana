@@ -15,6 +15,7 @@ import shield from '../assets/images/icon-shield.png';
 import heart from '../assets/images/icon-heart.png';
 import {FilterStoreButton} from '../components/FilterStoreButton';
 import {StoreChoises} from '../components/StoreChoises';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Store = ({navigation}) => {
   const [filterSelected, setFilterSelected] = useState('');
@@ -23,7 +24,7 @@ const Store = ({navigation}) => {
       <View style={styles.container}>
         <View style={styles.logo}>
           <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
-            <Text style={styles.btnLabel}> - </Text>
+            <Icon name="arrow-left" size={20} color={'white'} />
           </TouchableOpacity>
           <View style={styles.imgView}>
             <Image

@@ -3,7 +3,9 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import CreateCharacter from './src/screens/CreateCharacter';
 import SignIn from './src/screens/SignIn';
 import Home from './src/screens/Home';
+import Quests from './src/screens/Quests';
 import Store from './src/screens/Store';
+import Battle from './src/screens/Battle';
 import {NavigationContainer, StackActions} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -30,8 +32,10 @@ const AppNavigation = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <AppStack.Screen name="Store" component={Store} />
+      <AppStack.Screen name="Battle" component={Battle} />
       <AppStack.Screen name="Home" component={Home} />
+      <AppStack.Screen name="Quests" component={Quests} />
+      <AppStack.Screen name="Store" component={Store} />
     </AppStack.Navigator>
   );
 };
@@ -43,8 +47,8 @@ const App = () => {
         screenOptions={{
           headerShown: false,
         }}>
-        <RootStack.Screen name="App" component={AppNavigation} />
         <RootStack.Screen name="Auth" component={AuthNavigation} />
+        <RootStack.Screen name="App" component={AppNavigation} />
       </RootStack.Navigator>
     </NavigationContainer>
   );
