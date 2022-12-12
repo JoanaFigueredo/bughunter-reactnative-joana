@@ -50,7 +50,7 @@ const CreateCharacter = ({navigation}) => {
           </View>
         </View>
         <View style={styles.viewCreateCharacter}>
-          <Text style={styles.labelViewCreateCharacter}>Criar Personagem </Text>
+          <Text style={styles.labelViewCreateCharacter}>Criar Personagem</Text>
           <TextInput
             style={styles.input}
             placeholder="Nome do personagem"
@@ -74,7 +74,7 @@ const CreateCharacter = ({navigation}) => {
         <View style={styles.btnCreate}>
           <MainButton
             title="Criar"
-            onPress={() => navigation.navigate('Battle')}
+            onPress={() => navigation.navigate('App')}
           />
         </View>
       </View>

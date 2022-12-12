@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -6,19 +6,19 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
+  ScrollView,
 } from 'react-native';
 import logo from '../assets/images/logo.png';
 import coin from '../assets/images/coin.png';
 import sword from '../assets/images/icon-sword.png';
 import shield from '../assets/images/icon-shield.png';
 import heart from '../assets/images/icon-heart.png';
-import treasure from '../assets/images/treasure.png';
-import quest from '../assets/images/quest.png';
+import {FilterStoreButton} from '../components/FilterStoreButton';
+import {StoreChoises} from '../components/StoreChoises';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {HomeInfo} from '../components/HomeInfo';
-import {HomeFooter} from '../components/HomeFooter';
 
-const Home = ({navigation}) => {
+const Store = ({navigation}) => {
+  const [filterSelected, setFilterSelected] = useState('');
   return (
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
@@ -34,8 +34,8 @@ const Home = ({navigation}) => {
             />
           </View>
         </View>
-        <View style={styles.nameCharacter}>
-          <Text style={styles.labelNameCharacter}>Richarlison Pombo</Text>
+        <View style={styles.store}>
+          <Text style={styles.labelStore}>Loja</Text>
           <View style={styles.coinCash}>
             <Image
               source={coin}
@@ -45,25 +45,41 @@ const Home = ({navigation}) => {
             <Text style={styles.cash}>409</Text>
           </View>
         </View>
-        <View style={styles.viewSection}>
-          <HomeInfo image={sword} name="Ataque" value="100" hasBorder />
-          <HomeInfo image={shield} name="Defesa" value="50" hasBorder />
-          <HomeInfo image={heart} name="Vida" value="100" />
-        </View>
-        <View style={styles.footer}>
-          <TouchableOpacity onPress={() => navigation.navigate('Store')}>
-            <HomeFooter image={treasure} name={'Loja'} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Quests')}>
-            <HomeFooter image={quest} name={'Quests'} />
-          </TouchableOpacity>
-        </View>
+        <ScrollView horizontal style={styles.scrollFilter}>
+          <FilterStoreButton
+            label={'Todos'}
+            color={'#2E2635'}
+            isSelected={filterSelected === 'todos'}
+            onPress={() => setFilterSelected('todos')}
+          />
+          <FilterStoreButton
+            label={'Defesa'}
+            color={'#2E2635'}
+            isSelected={filterSelected === 'defesa'}
+            onPress={() => setFilterSelected('defesa')}
+          />
+          <FilterStoreButton
+            label={'Ataque'}
+            color={'#2E2635'}
+            isSelected={filterSelected === 'ataque'}
+            onPress={() => setFilterSelected('ataque')}
+          />
+          <FilterStoreButton
+            label={'Vida'}
+            color={'#2E2635'}
+            isSelected={filterSelected === 'vida'}
+            onPress={() => setFilterSelected('vida')}
+          />
+        </ScrollView>
+        <StoreChoises image={shield} label={'+50'} name={'Armadura de Frey'} />
+        <StoreChoises image={sword} label={'+50'} name={'Armadura de Frey'} />
+        <StoreChoises image={heart} label={'+30'} name={'Armadura de Frey'} />
       </View>
     </SafeAreaView>
   );
 };
 
-export default Home;
+export default Store;
 
 const styles = StyleSheet.create({
   main: {
@@ -100,13 +116,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
   },
-  nameCharacter: {
+  store: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
     justifyContent: 'space-between',
   },
-  labelNameCharacter: {
+  labelStore: {
     fontWeight: 'bold',
     fontSize: 32,
     color: 'white',
@@ -127,12 +143,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 9,
   },
-  viewSection: {
-    backgroundColor: '#2E2635',
-    borderRadius: 10,
-  },
-  footer: {
-    flex: 1,
-    justifyContent: 'flex-end',
+  scrollFilter: {
+    maxHeight: 35,
+    flexDirection: 'row',
+    marginBottom: 10,
   },
 });

@@ -5,25 +5,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export const QuestsList = ({name, label}) => {
   return (
-    <View style={styles.aaaaa}>
-      <View style={styles.container}>
-        <Text style={styles.description}>{name}</Text>
-        <View style={styles.treasureValuePlay}>
-          <View style={styles.treasureValue}>
-            <Image
-              style={styles.figure}
-              source={treasure}
-              resizeMode="contain"
-            />
-            <Text style={styles.value}>{label}</Text>
-          </View>
-          <Icon
-            name="play-circle"
-            size={40}
-            color={'red'}
-            style={styles.play}
-          />
+    <View style={styles.container}>
+      <Text style={styles.description}>{name}</Text>
+      <View style={styles.treasureValuePlay}>
+        <View style={styles.treasureValue}>
+          <Image style={styles.figure} source={treasure} resizeMode="contain" />
+          <Text style={styles.value}>{label}</Text>
         </View>
+        <Icon name="play-circle" size={40} color={'red'} style={styles.play} />
       </View>
     </View>
   );
@@ -34,12 +23,10 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
     backgroundColor: '#2E2635',
     height: 110,
-    width: 330,
     padding: 15,
     borderRadius: 10,
     marginBottom: 5,
-    borderWidth: 1,
-    borderColor: 'green',
+    width: '100%',
   },
   description: {
     color: 'white',
@@ -50,16 +37,14 @@ const styles = StyleSheet.create({
   treasureValuePlay: {
     alignItems: 'center',
     flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: 'red',
+    width: '100%',
+    justifyContent: 'space-between',
   },
   treasureValue: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
-    borderWidth: 1,
-    borderColor: 'blue',
   },
   figure: {
     width: 52,
@@ -74,7 +59,5 @@ const styles = StyleSheet.create({
   play: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'white',
   },
 });

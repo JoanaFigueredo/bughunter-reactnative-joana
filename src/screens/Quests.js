@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import logo from '../assets/images/logo.png';
 import {QuestsList} from '../components/QuestsList';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Quests = ({navigation}) => {
   return (
@@ -16,7 +17,7 @@ const Quests = ({navigation}) => {
       <View style={styles.container}>
         <View style={styles.logo}>
           <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
-            <Text style={styles.btnLabel}> - </Text>
+            <Icon name="arrow-left" size={20} color={'white'} />
           </TouchableOpacity>
           <View style={styles.imgView}>
             <Image

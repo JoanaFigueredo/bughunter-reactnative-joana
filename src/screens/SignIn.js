@@ -38,7 +38,7 @@ const SignIn = ({navigation}) => {
         <View style={styles.btnSingIn}>
           <MainButton
             title="Entrar"
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('App', {screen: 'Quests'})}
           />
         </View>
       </View>
