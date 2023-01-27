@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {
   StyleSheet,
   View,
@@ -17,41 +17,50 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MainButton from '../components/MainButton';
 import {BattleValues} from '../components/BattleValues';
 
-const Battle = ({navigation}) => {
+const Battle = ({navigation, route}) => {
+  const {quest} = route.params;
+  console.log(quest);
+  const hasBugs = quest.bugs.length > 0;
+
   return (
     <SafeAreaView style={styles.main}>
-      <SafeAreaView style={styles.main}>
-        <View style={styles.container}>
-          <View style={styles.logo}>
-            <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
-              <Icon name="arrow-left" size={20} color={'white'} />
-            </TouchableOpacity>
-            <View style={styles.imgView}>
-              <Image
-                source={logo}
-                resizeMode="contain"
-                style={styles.logoLabel}
-              />
-            </View>
+      <View style={styles.container}>
+        <View style={styles.logo}>
+          <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
+            <Icon name="arrow-left" size={20} color={'white'} />
+          </TouchableOpacity>
+          <View style={styles.imgView}>
+            <Image
+              source={logo}
+              resizeMode="contain"
+              style={styles.logoLabel}
+            />
           </View>
+        </View>
+        <View style={{flex: 1}}>
           <View style={styles.containerFigure}>
             <Image source={bug} resizeMode="contain" style={styles.bugFigure} />
             <View style={styles.sectionBugName}>
-              <Text style={styles.labelBugName}>Montro do Lago</Text>
+              <Text style={styles.labelBugName}>{quest.name}</Text>
             </View>
           </View>
-          <View style={styles.containerImages}>
-            <BattleValues image={shield} value="40" />
-            <BattleValues image={heart} value="20" />
-            <BattleValues image={sword} value="10" />
-          </View>
-          <View style={styles.treasure}>
-            <Image source={treasure} resizeMode="contain" style={styles.img} />
-            <Text style={styles.valueTreasure}>50</Text>
-          </View>
-          <MainButton title="Lutar" />
+          {hasBugs && (
+            <View style={styles.containerImages}>
+              <BattleValues image={shield} value={quest.bugs[0].def} />
+              <BattleValues image={heart} value={quest.bugs[0].agi} />
+              <BattleValues image={sword} value={quest.bugs[0].atk} />
+            </View>
+          )}
         </View>
-      </SafeAreaView>
+        <View style={styles.treasure}>
+          <Image source={treasure} resizeMode="contain" style={styles.img} />
+          <Text style={styles.valueTreasure}>{quest.reward}</Text>
+        </View>
+        <MainButton
+          title={hasBugs ? 'Lutar' : 'Farmar'}
+          onPress={() => navigation.navigate('StartBattle')}
+        />
+      </View>
     </SafeAreaView>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -6,12 +6,27 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
+  FlatList,
 } from 'react-native';
 import logo from '../assets/images/logo.png';
 import {QuestsList} from '../components/QuestsList';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import axios from 'axios';
 
 const Quests = ({navigation}) => {
+  const [quests, setQuests] = useState([]);
+
+  useEffect(() => {
+    getQuests();
+  }, []);
+
+  const getQuests = async () => {
+    const response = await axios.get(
+      'https://dws-bug-hunters-api.vercel.app/api/tasks',
+    );
+    setQuests(response.data);
+  };
+
   return (
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
@@ -30,9 +45,10 @@ const Quests = ({navigation}) => {
         <View style={styles.quests}>
           <Text style={styles.labelQuests}>Quests</Text>
         </View>
-        <QuestsList label={'500'} name={'Zeus'} />
-        <QuestsList label={'50'} name={'Kratos'} />
-        <QuestsList label={'130'} name={'Thanos'} />
+        <FlatList
+          data={quests}
+          renderItem={({item}) => <QuestsList item={item} />}
+        />
       </View>
     </SafeAreaView>
   );

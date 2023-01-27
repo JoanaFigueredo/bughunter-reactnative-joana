@@ -11,19 +11,22 @@ import logo from '../assets/images/logo.png';
 import coin from '../assets/images/coin.png';
 import sword from '../assets/images/icon-sword.png';
 import shield from '../assets/images/icon-shield.png';
-import heart from '../assets/images/icon-heart.png';
+import agility from '../assets/images/icon-agility.png';
 import treasure from '../assets/images/treasure.png';
 import quest from '../assets/images/quest.png';
+import chest from '../assets/images/chest.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {HomeInfo} from '../components/HomeInfo';
 import {HomeFooter} from '../components/HomeFooter';
+import {useAuthContext} from '../contexts/AuthContext';
 
 const Home = ({navigation}) => {
+  const {logOut, user} = useAuthContext();
   return (
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
         <View style={styles.logo}>
-          <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
+          <TouchableOpacity style={styles.btn} onPress={logOut}>
             <Icon name="arrow-left" size={20} color={'white'} />
           </TouchableOpacity>
           <View style={styles.imgView}>
@@ -35,22 +38,26 @@ const Home = ({navigation}) => {
           </View>
         </View>
         <View style={styles.nameCharacter}>
-          <Text style={styles.labelNameCharacter}>Richarlison Pombo</Text>
+          <Text style={styles.labelNameCharacter}>{user.name}</Text>
           <View style={styles.coinCash}>
             <Image
               source={coin}
               resizeMode="contain"
               style={styles.coinLabel}
             />
-            <Text style={styles.cash}>409</Text>
+            <Text style={styles.cash}>{user.gold}</Text>
           </View>
         </View>
         <View style={styles.viewSection}>
-          <HomeInfo image={sword} name="Ataque" value="100" hasBorder />
-          <HomeInfo image={shield} name="Defesa" value="50" hasBorder />
-          <HomeInfo image={heart} name="Vida" value="100" />
+          <HomeInfo image={sword} name="Ataque" value={user.atk} hasBorder />
+          <HomeInfo image={shield} name="Defesa" value={user.def} hasBorder />
+          <HomeInfo image={agility} name="Agilidade" value={user.hp} />
         </View>
         <View style={styles.footer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('EquipmentsList')}>
+            <HomeFooter image={chest} name={'Equipamentos'} />
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Store')}>
             <HomeFooter image={treasure} name={'Loja'} />
           </TouchableOpacity>

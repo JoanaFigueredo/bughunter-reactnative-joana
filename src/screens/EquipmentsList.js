@@ -10,43 +10,29 @@ import {
   FlatList,
 } from 'react-native';
 import logo from '../assets/images/logo.png';
-import coin from '../assets/images/coin.png';
 import {FilterStoreButton} from '../components/FilterStoreButton';
-import {StoreChoises} from '../components/StoreChoises';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import axios from 'axios';
+import {Equipments} from '../components/Equipments';
 import {useAuthContext} from '../contexts/AuthContext';
 
-const Store = ({navigation}) => {
-  const [filterSelected, setFilterSelected] = useState('all');
-  const [all, setAll] = useState([]);
-  const [filtered, setFiltered] = useState([]);
+const EquipmentsList = ({navigation}) => {
   const {user} = useAuthContext();
+  const [filterSelected, setFilterSelected] = useState('all');
+  const [all, setAll] = useState(user.equipment);
+  const [filtered, setFiltered] = useState(user.equipment);
 
   useEffect(() => {
-    getItensStore();
-  }, []);
-
-  useEffect(() => {
-    itensFilter();
+    filterList();
   }, [filterSelected]);
 
-  const getItensStore = async () => {
-    const response = await axios.get(
-      'https://dws-bug-hunters-api.vercel.app/api/equipment',
-    );
-    setAll(response.data);
-    setFiltered(response.data);
-  };
-
-  const itensFilter = () => {
+  const filterList = () => {
     if (filterSelected === 'all') {
       setFiltered(all);
     } else {
-      const filteredItens = all.filter(
+      const itens = all.filter(
         item => item.affected_attribute === filterSelected,
       );
-      setFiltered(filteredItens);
+      setFiltered(itens);
     }
   };
 
@@ -65,16 +51,8 @@ const Store = ({navigation}) => {
             />
           </View>
         </View>
-        <View style={styles.store}>
-          <Text style={styles.labelStore}>Loja</Text>
-          <View style={styles.coinCash}>
-            <Image
-              source={coin}
-              resizeMode="contain"
-              style={styles.coinLabel}
-            />
-            <Text style={styles.cash}>{user.gold}</Text>
-          </View>
+        <View style={styles.equipment}>
+          <Text style={styles.labelEquipament}>Equipamentos</Text>
         </View>
         <ScrollView horizontal style={styles.scrollFilter}>
           <FilterStoreButton
@@ -104,14 +82,15 @@ const Store = ({navigation}) => {
         </ScrollView>
         <FlatList
           data={filtered}
-          renderItem={({item}) => <StoreChoises item={item} />}
+          renderItem={({item}) => <Equipments item={item} />}
+          keyExtractor={(_, index) => `@equipment-${index}`}
         />
       </View>
     </SafeAreaView>
   );
 };
 
-export default Store;
+export default EquipmentsList;
 
 const styles = StyleSheet.create({
   main: {
@@ -148,32 +127,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
   },
-  store: {
+  equipment: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
     justifyContent: 'space-between',
   },
-  labelStore: {
+  labelEquipament: {
     fontWeight: 'bold',
     fontSize: 32,
     color: 'white',
-  },
-  coinCash: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  coinLabel: {
-    width: 16,
-    height: 16,
-  },
-  cash: {
-    color: '#F3CC30',
-    flexDirection: 'row',
-    alignItems: 'center',
-    fontWeight: 'bold',
-    fontSize: 20,
-    marginLeft: 9,
   },
   scrollFilter: {
     maxHeight: 35,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -12,16 +12,18 @@ import {
 import MainButton from '../components/MainButton';
 import logo from '../assets/images/logo.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useAuthContext} from '../contexts/AuthContext';
 
 const SignIn = ({navigation}) => {
+  const [characterName, setCharacterName] = useState('planeta');
+  const {chooseCharacter, isLoading} = useAuthContext();
+
   return (
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
-        <View style={styles.button}>
-          <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
-            <Icon name="arrow-left" size={20} color={'white'} />
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={styles.btn} onPress={navigation.goBack}>
+          <Icon name="arrow-left" size={20} color={'white'} />
+        </TouchableOpacity>
         <View style={styles.logo}>
           <Image source={logo} resizeMode="contain" style={styles.logoLabel} />
           <Text style={styles.textBH}>Bug Hunter</Text>
@@ -31,14 +33,18 @@ const SignIn = ({navigation}) => {
         </View>
         <View style={styles.input}>
           <TextInput
+            autoCapitalize="none"
             style={styles.inputLabel}
             placeholder="Nome do personagem"
+            value={characterName}
+            onChangeText={text => setCharacterName(text)}
           />
         </View>
         <View style={styles.btnSingIn}>
           <MainButton
+            isLoading={isLoading}
             title="Entrar"
-            onPress={() => navigation.navigate('App', {screen: 'Quests'})}
+            onPress={() => chooseCharacter(characterName)}
           />
         </View>
       </View>

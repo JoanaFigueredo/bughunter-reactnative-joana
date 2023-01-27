@@ -1,17 +1,107 @@
 import React from 'react';
-import {Image, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import sword from '../assets/images/icon-sword.png';
+import shield from '../assets/images/icon-shield.png';
+import agility from '../assets/images/icon-agility.png';
+import coin from '../assets/images/coin.png';
+import {useAuthContext} from '../contexts/AuthContext';
+import axios from 'axios';
 
-export const StoreChoises = ({image, name, label}) => {
+export const StoreChoises = ({item}) => {
+  const {user, setUser} = useAuthContext();
+
+  const image = () => {
+    if (item.affected_attribute === 'def') {
+      return (
+        <Image style={styles.figure} source={shield} resizeMode="contain" />
+      );
+    }
+    if (item.affected_attribute === 'atk') {
+      return (
+        <Image style={styles.figure} source={sword} resizeMode="contain" />
+      );
+    }
+    if (item.affected_attribute === 'agi') {
+      return (
+        <Image style={styles.figure} source={agility} resizeMode="contain" />
+      );
+    }
+  };
+
+  const buy = async () => {
+    try {
+      console.log(user);
+      if (item.value <= user.gold) {
+        const newValueGold = user.gold - item.value;
+        const characterUpdated = {
+          ...user,
+          gold: newValueGold,
+          equipment: [...user.equipment, item],
+          [item.affected_attribute]:
+            user[item.affected_attribute] + item.affected_amount,
+        };
+        const response = await axios.patch(
+          'https://dws-bug-hunters-api.vercel.app/api/characters/',
+          characterUpdated,
+        );
+        console.log(response.data);
+        Toast.show({
+          type: 'success',
+          text2: 'Compra feita com sucesso! (:',
+        });
+        setUser(characterUpdated);
+      } else {
+        Toast.show({
+          type: 'error',
+          text2: 'Putz, tu não tem ouro suficiente pra comprar esse item ):',
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      Toast.show({
+        type: 'error',
+        text2: 'Ooops, algo deu errado ):',
+      });
+    }
+  };
+
+  const buyItem = () => {
+    Alert.alert('', 'Tem certeza que deseja comprar este item?', [
+      {text: 'Sim', onPress: buy},
+      {text: 'Não'},
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.figureValue}>
-        <Image style={styles.figure} source={image} resizeMode="contain" />
-        <Text style={styles.value}>{label}</Text>
+        {image()}
+        <Text style={styles.value}>+{item.affected_amount}</Text>
         <Text style={styles.bar}>|</Text>
-        <Text style={styles.description}>{name}</Text>
+        <View style={styles.dois}>
+          <Text style={styles.description} numberOfLines={1}>
+            {item.name}
+          </Text>
+          <View style={styles.info}>
+            <Image
+              source={coin}
+              resizeMode="contain"
+              style={styles.coinLabel}
+            />
+            <Text style={styles.itemValue}>{item.value}</Text>
+          </View>
+        </View>
       </View>
-      <TouchableOpacity style={styles.btnCart}>
+      <TouchableOpacity style={styles.btnCart} onPress={buyItem}>
         <Icon name="cart" size={20} color={'#8F00FF'} />
       </TouchableOpacity>
     </View>
@@ -19,9 +109,18 @@ export const StoreChoises = ({image, name, label}) => {
 };
 
 const styles = StyleSheet.create({
+  dois: {
+    height: 44,
+    width: 200,
+    marginLeft: 5,
+  },
+  info: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   container: {
     backgroundColor: '#2E2635',
-    height: 55,
+    height: 65,
     padding: 15,
     borderRadius: 10,
     marginBottom: 5,
@@ -33,6 +132,8 @@ const styles = StyleSheet.create({
   figureValue: {
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
+    paddingRight: 15,
   },
   figure: {
     width: 24,
@@ -52,7 +153,16 @@ const styles = StyleSheet.create({
   description: {
     color: 'white',
     fontSize: 16,
-    marginLeft: 10,
+    flex: 1,
+  },
+  coinLabel: {
+    width: 16,
+    height: 16,
+    marginRight: 5,
+  },
+  itemValue: {
+    color: '#F3CC30',
+    fontSize: 16,
   },
   btnCart: {
     height: 34,
