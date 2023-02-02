@@ -108,15 +108,17 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   nameCharacter: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    // flexDirection: 'row',
+    alignItems: 'flex-end',
     marginBottom: 20,
     justifyContent: 'space-between',
+    borderColor: 'white',
   },
   labelNameCharacter: {
     fontWeight: 'bold',
-    fontSize: 32,
+    fontSize: 44,
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
   coinCash: {
     flexDirection: 'row',

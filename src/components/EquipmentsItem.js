@@ -1,36 +1,16 @@
 import React from 'react';
-import {Image, View, Text, StyleSheet} from 'react-native';
-import sword from '../assets/images/icon-sword.png';
-import shield from '../assets/images/icon-shield.png';
-import agility from '../assets/images/icon-agility.png';
+import {View, Text, StyleSheet} from 'react-native';
+import {EffectImage} from './EffectImage';
 
-export const Equipments = ({item}) => {
-  const image = () => {
-    if (item.affected_attribute === 'def') {
-      return (
-        <Image style={styles.figure} source={shield} resizeMode="contain" />
-      );
-    }
-    if (item.affected_attribute === 'atk') {
-      return (
-        <Image style={styles.figure} source={sword} resizeMode="contain" />
-      );
-    }
-    if (item.affected_attribute === 'agi') {
-      return (
-        <Image style={styles.figure} source={agility} resizeMode="contain" />
-      );
-    }
-  };
-
+export const EquipmentsItem = ({item: equipmentes}) => {
   return (
     <View style={styles.container}>
       <View style={styles.equipmentValue}>
-        {image()}
-        <Text style={styles.value}>+{item.affected_amount}</Text>
+        <EffectImage atb={equipmentes.affected_attribute} />
+        <Text style={styles.value}>+{equipmentes.affected_amount}</Text>
         <Text style={styles.bar}>| </Text>
         <Text style={styles.description} numberOfLines={1}>
-          {item.name}
+          {equipmentes.name}
         </Text>
       </View>
     </View>

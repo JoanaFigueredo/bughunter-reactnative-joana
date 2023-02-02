@@ -9,33 +9,13 @@ import {
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import sword from '../assets/images/icon-sword.png';
-import shield from '../assets/images/icon-shield.png';
-import agility from '../assets/images/icon-agility.png';
 import coin from '../assets/images/coin.png';
 import {useAuthContext} from '../contexts/AuthContext';
+import {EffectImage} from './EffectImage';
 import axios from 'axios';
 
 export const StoreChoises = ({item}) => {
   const {user, setUser} = useAuthContext();
-
-  const image = () => {
-    if (item.affected_attribute === 'def') {
-      return (
-        <Image style={styles.figure} source={shield} resizeMode="contain" />
-      );
-    }
-    if (item.affected_attribute === 'atk') {
-      return (
-        <Image style={styles.figure} source={sword} resizeMode="contain" />
-      );
-    }
-    if (item.affected_attribute === 'agi') {
-      return (
-        <Image style={styles.figure} source={agility} resizeMode="contain" />
-      );
-    }
-  };
 
   const buy = async () => {
     try {
@@ -80,11 +60,11 @@ export const StoreChoises = ({item}) => {
       {text: 'Não'},
     ]);
   };
-
+  console.log(item.affected_attribute);
   return (
     <View style={styles.container}>
       <View style={styles.figureValue}>
-        {image()}
+        <EffectImage atb={item.affected_attribute} />
         <Text style={styles.value}>+{item.affected_amount}</Text>
         <Text style={styles.bar}>|</Text>
         <View style={styles.dois}>

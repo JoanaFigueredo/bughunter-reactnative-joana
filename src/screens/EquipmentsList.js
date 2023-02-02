@@ -12,7 +12,7 @@ import {
 import logo from '../assets/images/logo.png';
 import {FilterStoreButton} from '../components/FilterStoreButton';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Equipments} from '../components/Equipments';
+import {EquipmentsItem} from '../components/EquipmentsItem';
 import {useAuthContext} from '../contexts/AuthContext';
 
 const EquipmentsList = ({navigation}) => {
@@ -82,7 +82,7 @@ const EquipmentsList = ({navigation}) => {
         </ScrollView>
         <FlatList
           data={filtered}
-          renderItem={({item}) => <Equipments item={item} />}
+          renderItem={({item}) => <EquipmentsItem item={item} />}
           keyExtractor={(_, index) => `@equipment-${index}`}
         />
       </View>
