@@ -1,10 +1,19 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Text} from 'react-native';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 
-const MainButton = ({title, onPress}) => {
+const MainButton = ({title, onPress, isLoading}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Text style={styles.buttonLabel}>{title}</Text>
+      {isLoading ? (
+        <ActivityIndicator animating />
+      ) : (
+        <Text style={styles.buttonLabel}>{title}</Text>
+      )}
     </TouchableOpacity>
   );
 };

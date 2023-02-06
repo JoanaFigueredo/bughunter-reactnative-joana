@@ -9,20 +9,22 @@ import {
   TouchableOpacity,
   SafeAreaView,
   FlatList,
+  Alert,
 } from 'react-native';
 import MainButton from '../components/MainButton';
 import logo from '../assets/images/logo.png';
 import {FactionButton} from '../components/FactionButton';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useAuthContext} from '../contexts/AuthContext';
 
 const CreateCharacter = ({navigation}) => {
-  const [characterName, setCharacterName] = useState('');
-  const [factionSelected, setFactionSelected] = useState('');
   const [factions, setFactions] = useState([]);
+  const [characterName, setCharacterName] = useState('');
+  const [factionSelected, setFactionSelected] = useState({id: '', name: ''});
+  const {create} = useAuthContext();
 
   useEffect(() => {
-    console.log('funcionando');
     getFactions();
   }, []);
 
@@ -30,8 +32,11 @@ const CreateCharacter = ({navigation}) => {
     const response = await axios.get(
       'https://dws-bug-hunters-api.vercel.app/api/factions',
     );
-    console.log(response.data);
     setFactions(response.data);
+  };
+
+  const createPress = () => {
+    create({characterName, factionSelected});
   };
 
   return (
@@ -66,16 +71,13 @@ const CreateCharacter = ({navigation}) => {
           renderItem={({item}) => (
             <FactionButton
               label={item.name}
-              onPress={() => setFactionSelected(item.name)}
-              isSelected={factionSelected === item.name}
+              onPress={() => setFactionSelected(item)}
+              isSelected={factionSelected.id === item.id}
             />
           )}
         />
         <View style={styles.btnCreate}>
-          <MainButton
-            title="Criar"
-            onPress={() => navigation.navigate('App')}
-          />
+          <MainButton title="Criar" onPress={createPress} />
         </View>
       </View>
     </SafeAreaView>
