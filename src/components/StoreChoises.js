@@ -32,7 +32,6 @@ export const StoreChoises = ({item}) => {
           'https://dws-bug-hunters-api.vercel.app/api/characters/',
           characterUpdated,
         );
-        console.log(response.data);
         Toast.show({
           type: 'success',
           text2: 'Compra feita com sucesso! (:',
