@@ -19,7 +19,6 @@ export const StoreChoises = ({item}) => {
 
   const buy = async () => {
     try {
-      console.log(user);
       if (item.value <= user.gold) {
         const newValueGold = user.gold - item.value;
         const characterUpdated = {
@@ -60,7 +59,6 @@ export const StoreChoises = ({item}) => {
       {text: 'Não'},
     ]);
   };
-  console.log(item.affected_attribute);
   return (
     <View style={styles.container}>
       <View style={styles.figureValue}>
