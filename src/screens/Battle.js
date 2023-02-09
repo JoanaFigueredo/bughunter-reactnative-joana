@@ -19,7 +19,6 @@ import {BattleValues} from '../components/BattleValues';
 
 const Battle = ({navigation, route}) => {
   const {quest} = route.params;
-  console.log(quest);
   const hasBugs = quest.bugs.length > 0;
 
   return (

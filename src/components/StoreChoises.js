@@ -19,7 +19,6 @@ export const StoreChoises = ({item}) => {
 
   const buy = async () => {
     try {
-      console.log(user);
       if (item.value <= user.gold) {
         const newValueGold = user.gold - item.value;
         const characterUpdated = {
@@ -33,7 +32,6 @@ export const StoreChoises = ({item}) => {
           'https://dws-bug-hunters-api.vercel.app/api/characters/',
           characterUpdated,
         );
-        console.log(response.data);
         Toast.show({
           type: 'success',
           text2: 'Compra feita com sucesso! (:',
@@ -60,7 +58,6 @@ export const StoreChoises = ({item}) => {
       {text: 'Não'},
     ]);
   };
-  console.log(item.affected_attribute);
   return (
     <View style={styles.container}>
       <View style={styles.figureValue}>

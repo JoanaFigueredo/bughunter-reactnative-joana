@@ -18,10 +18,12 @@ import chest from '../assets/images/chest.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {HomeInfo} from '../components/HomeInfo';
 import {HomeFooter} from '../components/HomeFooter';
+import {ImageCharacter} from '../components/ImageCharacter';
 import {useAuthContext} from '../contexts/AuthContext';
 
 const Home = ({navigation}) => {
   const {logOut, user} = useAuthContext();
+
   return (
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
@@ -37,15 +39,18 @@ const Home = ({navigation}) => {
             />
           </View>
         </View>
-        <View style={styles.nameCharacter}>
-          <Text style={styles.labelNameCharacter}>{user.name}</Text>
-          <View style={styles.coinCash}>
-            <Image
-              source={coin}
-              resizeMode="contain"
-              style={styles.coinLabel}
-            />
-            <Text style={styles.cash}>{user.gold}</Text>
+        <View style={styles.containerImg}>
+          <ImageCharacter atb={user.factions[0].name} />
+          <View style={styles.nameCharacter}>
+            <Text style={styles.labelNameCharacter}>{user.name}</Text>
+            <View style={styles.coinCash}>
+              <Image
+                source={coin}
+                resizeMode="contain"
+                style={styles.coinLabel}
+              />
+              <Text style={styles.cash}>{user.gold}</Text>
+            </View>
           </View>
         </View>
         <View style={styles.viewSection}>
@@ -107,12 +112,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
   },
-  nameCharacter: {
-    // flexDirection: 'row',
-    alignItems: 'flex-end',
-    marginBottom: 20,
+  containerImg: {
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    borderColor: 'white',
+    marginTop: -20,
+  },
+  nameCharacter: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   labelNameCharacter: {
     fontWeight: 'bold',

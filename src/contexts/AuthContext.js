@@ -68,7 +68,6 @@ export const AuthProvider = ({children}) => {
       factionSelected !== '' &&
       characterName.length >= 3
     ) {
-      console.log(factionSelected, characterName);
       const getcatchCharacters = await getCharacters();
       const findCharacter = getcatchCharacters.find(
         elem => elem.name === characterName,
