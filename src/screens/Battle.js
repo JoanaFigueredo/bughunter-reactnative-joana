@@ -53,6 +53,13 @@ const Battle = ({navigation, route}) => {
     navigation.navigate('Quests');
   };
 
+  const handleMainButtonPress = () => {
+    if (hasBugs) {
+      navigation.navigate('StartBattle', {quest});
+    } else {
+      wonBattle();
+    }
+  };
   return (
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
@@ -87,14 +94,7 @@ const Battle = ({navigation, route}) => {
           <Image source={treasure} resizeMode="contain" style={styles.img} />
           <Text style={styles.valueTreasure}>{quest.reward}</Text>
         </View>
-        <MainButton
-          title={buttonLabel}
-          onPress={
-            hasBugs
-              ? () => navigation.navigate('StartBattle', {quest})
-              : wonBattle
-          }
-        />
+        <MainButton title={buttonLabel} onPress={handleMainButtonPress} />
       </View>
     </SafeAreaView>
   );
