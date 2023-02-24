@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {useMemo} from 'react';
 import {
   StyleSheet,
   View,
@@ -15,11 +15,43 @@ import bug from '../assets/images/bug.png';
 import treasure from '../assets/images/treasure.png';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MainButton from '../components/MainButton';
+import Toast from 'react-native-toast-message';
 import {BattleValues} from '../components/BattleValues';
+import {useAuthContext} from '../contexts/AuthContext';
+import axios from 'axios';
 
 const Battle = ({navigation, route}) => {
+  const {user, setUser} = useAuthContext();
   const {quest} = route.params;
   const hasBugs = quest.bugs.length > 0;
+
+  const buttonLabel = useMemo(() => {
+    if (hasBugs) {
+      return 'Lutar';
+    }
+    if (!hasBugs) {
+      return 'Farmar';
+    }
+    return '';
+  }, [hasBugs]);
+
+  const wonBattle = async () => {
+    const newValueGold = user.gold + quest.reward;
+    const characterUpdated = {
+      ...user,
+      gold: newValueGold,
+    };
+    const response = await axios.patch(
+      'https://dws-bug-hunters-api.vercel.app/api/characters/',
+      characterUpdated,
+    );
+    setUser(characterUpdated);
+    Toast.show({
+      type: 'success',
+      text2: 'Parabéns! Tu ganhou a batalha (:',
+    });
+    navigation.navigate('Quests');
+  };
 
   return (
     <SafeAreaView style={styles.main}>
@@ -56,8 +88,12 @@ const Battle = ({navigation, route}) => {
           <Text style={styles.valueTreasure}>{quest.reward}</Text>
         </View>
         <MainButton
-          title={hasBugs ? 'Lutar' : 'Farmar'}
-          onPress={() => navigation.navigate('StartBattle')}
+          title={buttonLabel}
+          onPress={
+            hasBugs
+              ? () => navigation.navigate('StartBattle', {quest})
+              : wonBattle
+          }
         />
       </View>
     </SafeAreaView>
