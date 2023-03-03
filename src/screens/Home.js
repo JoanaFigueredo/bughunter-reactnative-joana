@@ -20,6 +20,7 @@ import {HomeInfo} from '../components/HomeInfo';
 import {HomeFooter} from '../components/HomeFooter';
 import {ImageCharacter} from '../components/ImageCharacter';
 import {useAuthContext} from '../contexts/AuthContext';
+import Lottie from 'lottie-react-native';
 
 const Home = ({navigation}) => {
   const {logOut, user} = useAuthContext();
@@ -41,8 +42,13 @@ const Home = ({navigation}) => {
         </View>
         <View style={styles.containerImg}>
           <ImageCharacter atb={user.factions[0].name} />
-          <View style={styles.nameCharacter}>
-            <Text style={styles.labelNameCharacter}>{user.name}</Text>
+          <View style={styles.nameCharacterContainer}>
+            <Text
+              // adjustsFontSizeToFit
+              numberOfLines={1}
+              style={styles.nameCharacter}>
+              {user.name}
+            </Text>
             <View style={styles.coinCash}>
               <Image
                 source={coin}
@@ -90,10 +96,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  logoLabel: {
-    width: 100,
-    height: 80,
-  },
   btn: {
     height: 40,
     width: 40,
@@ -107,25 +109,28 @@ const styles = StyleSheet.create({
     height: 80,
     paddingLeft: '25%',
   },
-  btnLabel: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'white',
+  logoLabel: {
+    width: 100,
+    height: 80,
   },
   containerImg: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: -20,
   },
-  nameCharacter: {
+  nameCharacterContainer: {
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
+    paddingLeft: 3,
+    flex: 1,
   },
-  labelNameCharacter: {
+  nameCharacter: {
     fontWeight: 'bold',
-    fontSize: 44,
+    fontSize: 35,
     color: 'white',
     fontFamily: 'Poppins-Regular',
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   coinCash: {
     flexDirection: 'row',
@@ -142,6 +147,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     marginLeft: 9,
+    fontFamily: 'Poppins-Regular',
   },
   viewSection: {
     backgroundColor: '#2E2635',

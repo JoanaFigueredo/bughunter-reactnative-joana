@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
   },
   textFooter: {
     color: 'white',
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular',
   },
 });

@@ -55,5 +55,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     flex: 1,
     alignItems: 'center',
+    fontFamily: 'Poppins-Regular',
   },
 });

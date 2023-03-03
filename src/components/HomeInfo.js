@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular',
   },
   value: {
     color: '#3BDA5E',
@@ -43,5 +44,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontWeight: 'bold',
     fontSize: 20,
+    fontFamily: 'Poppins-Regular',
   },
 });

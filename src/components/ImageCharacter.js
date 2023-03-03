@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
   figureBack: {
     width: 160,
     height: 150,
-    transform: [{translateY: 30}, {translateX: -19}, {scale: 1.1}],
+    transform: [{translateY: 30}, {translateX: -10}, {scale: 1.1}],
   },
 });

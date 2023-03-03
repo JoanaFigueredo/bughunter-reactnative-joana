@@ -64,7 +64,7 @@ export const StoreChoises = ({item}) => {
         <EffectImage atb={item.affected_attribute} />
         <Text style={styles.value}>+{item.affected_amount}</Text>
         <Text style={styles.bar}>|</Text>
-        <View style={styles.dois}>
+        <View style={styles.containerValueDescription}>
           <Text style={styles.description} numberOfLines={1}>
             {item.name}
           </Text>
@@ -86,11 +86,6 @@ export const StoreChoises = ({item}) => {
 };
 
 const styles = StyleSheet.create({
-  dois: {
-    height: 44,
-    width: 200,
-    marginLeft: 5,
-  },
   info: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -127,10 +122,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 10,
   },
+  containerValueDescription: {
+    height: 44,
+    width: 200,
+    marginLeft: 5,
+  },
   description: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 15,
     flex: 1,
+    fontFamily: 'Poppins-Regular',
   },
   coinLabel: {
     width: 16,
@@ -140,6 +141,7 @@ const styles = StyleSheet.create({
   itemValue: {
     color: '#F3CC30',
     fontSize: 16,
+    fontFamily: 'Poppins-Regular',
   },
   btnCart: {
     height: 34,

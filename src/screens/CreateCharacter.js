@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   SafeAreaView,
   FlatList,
-  Alert,
 } from 'react-native';
 import MainButton from '../components/MainButton';
 import logo from '../assets/images/logo.png';
@@ -22,7 +21,7 @@ const CreateCharacter = ({navigation}) => {
   const [factions, setFactions] = useState([]);
   const [characterName, setCharacterName] = useState('');
   const [factionSelected, setFactionSelected] = useState({id: '', name: ''});
-  const {create} = useAuthContext();
+  const {create, isLoading} = useAuthContext();
 
   useEffect(() => {
     getFactions();
@@ -58,6 +57,7 @@ const CreateCharacter = ({navigation}) => {
           <Text style={styles.labelViewCreateCharacter}>Criar Personagem</Text>
           <TextInput
             style={styles.input}
+            autoCapitalize="none"
             placeholder="Nome do personagem"
             value={characterName}
             onChangeText={text => setCharacterName(text)}
@@ -77,7 +77,11 @@ const CreateCharacter = ({navigation}) => {
           )}
         />
         <View style={styles.btnCreate}>
-          <MainButton title="Criar" onPress={createPress} />
+          <MainButton
+            title="Criar"
+            onPress={createPress}
+            isLoading={isLoading}
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -99,10 +103,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  logoLabel: {
-    width: 100,
-    height: 80,
-  },
   btn: {
     height: 40,
     width: 40,
@@ -116,23 +116,18 @@ const styles = StyleSheet.create({
     height: 80,
     paddingLeft: '25%',
   },
-  flatListContainer: {
-    flexGrow: 1,
-    justifyContent: 'space-between',
-    marginTop: 15,
-  },
-  btnLabel: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'white',
+  logoLabel: {
+    width: 100,
+    height: 80,
   },
   viewCreateCharacter: {
     alignItems: 'flex-start',
   },
   labelViewCreateCharacter: {
     fontWeight: 'bold',
-    fontSize: 50,
+    fontSize: 40,
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
   input: {
     width: '100%',
@@ -143,17 +138,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
     paddingHorizontal: 10,
+    fontFamily: 'Poppins-Regular',
   },
   labelFaction: {
     marginTop: 30,
-    fontSize: 32,
+    fontSize: 28,
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
-  images: {
-    alignItems: 'center',
+  flatListContainer: {
+    flexGrow: 1,
     justifyContent: 'space-between',
-    flexDirection: 'row',
-    marginTop: 20,
+    marginTop: 15,
   },
   btnCreate: {
     flex: 1,

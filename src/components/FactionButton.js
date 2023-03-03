@@ -61,5 +61,6 @@ const styles = StyleSheet.create({
   nameFac: {
     color: 'white',
     fontSize: 16,
+    fontFamily: 'Poppins-Regular',
   },
 });

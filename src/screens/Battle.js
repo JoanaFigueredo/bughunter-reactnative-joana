@@ -115,10 +115,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  logoLabel: {
-    width: 100,
-    height: 80,
-  },
   btn: {
     height: 40,
     width: 40,
@@ -132,10 +128,9 @@ const styles = StyleSheet.create({
     height: 80,
     paddingLeft: '25%',
   },
-  btnLabel: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'white',
+  logoLabel: {
+    width: 100,
+    height: 80,
   },
   containerFigure: {
     alignItems: 'center',
@@ -159,24 +154,26 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  img: {
-    width: 53,
-    height: 54,
+    fontFamily: 'Poppins-Regular',
   },
   containerImages: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  valueTreasure: {
-    color: '#F3CC30',
-    fontSize: 20,
-    fontWeight: 'bold',
   },
   treasure: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 90,
+  },
+  valueTreasure: {
+    color: '#F3CC30',
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular',
+  },
+  img: {
+    width: 53,
+    height: 54,
   },
 });

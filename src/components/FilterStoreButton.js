@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
   },
   textFilter: {
     color: 'white',
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular',
   },
 });

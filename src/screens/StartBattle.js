@@ -9,6 +9,8 @@ import {
   ImageBackground,
   FlatList,
   Alert,
+  ActivityIndicator,
+  Modal,
 } from 'react-native';
 import Reanimated, {
   FadeIn,
@@ -16,7 +18,6 @@ import Reanimated, {
   SlideInRight,
   FadeOut,
 } from 'react-native-reanimated';
-import Toast from 'react-native-toast-message';
 import background from '../assets/images/background-battle.png';
 import bug from '../assets/images/character-bug-2.png';
 import actionSwords from '../assets/animations/64201-action-sword.json';
@@ -25,11 +26,13 @@ import Lottie from 'lottie-react-native';
 import heart from '../assets/images/icon-heart.png';
 import {CharacterBattleStart} from '../components/CharacterBattleStart';
 import {useAuthContext} from '../contexts/AuthContext';
-import axios from 'axios';
+import TreasureModal from '../components/TreasureModal';
+import GameOverModal from '../components/GameOverModal';
 
 const StartBattle = ({navigation, route}) => {
-  const {user, setUser} = useAuthContext();
+  const {user, updatedCharacter, isLoading} = useAuthContext();
   const {quest} = route.params;
+  const [modalVisible, setModalVisable] = useState(false);
   const [logList, setLogList] = useState([]);
   const [hpCharacter, setHpCharacter] = useState(user.hp);
   const [hpBug, setHpBug] = useState(quest.bugs[0].hp);
@@ -82,37 +85,31 @@ const StartBattle = ({navigation, route}) => {
         ...user,
         equipment: newArrayEquipments,
       };
-      const response = await axios.patch(
-        'https://dws-bug-hunters-api.vercel.app/api/characters',
-        updatedUser,
-      );
-      setUser(updatedUser);
-      Toast.show({
-        type: 'error',
-        text2: 'Pouxa! Tu perdeu a batalha ):',
-      });
+      await updatedCharacter(updatedUser);
+      setModalVisable(true);
     } catch (error) {
       console.error(error);
     }
-    navigation.navigate('Quests');
   };
 
   const wonBattle = async () => {
-    const newValueGold = user.gold + quest.reward;
-    const characterUpdated = {
-      ...user,
-      gold: newValueGold,
-    };
-    const response = await axios.patch(
-      'https://dws-bug-hunters-api.vercel.app/api/characters/',
-      characterUpdated,
-    );
-    setUser(characterUpdated);
-    Toast.show({
-      type: 'success',
-      text2: 'Parabéns! Tu ganhou a batalha (:',
-    });
-    navigation.navigate('Quests');
+    try {
+      const newValueGold = user.gold + quest.reward;
+      const characterUpdated = {
+        ...user,
+        gold: newValueGold,
+      };
+      await updatedCharacter(characterUpdated);
+      setModalVisable(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const navigateToQuests = () => {
+    setTimeout(() => {
+      navigation.navigate('Quests');
+    }, 1000);
   };
 
   const atkCharacter = () => {
@@ -177,6 +174,13 @@ const StartBattle = ({navigation, route}) => {
   }, []);
   return (
     <ImageBackground source={background} style={styles.background}>
+      <Modal visible={modalVisible} transparent={true} animationType={'fade'}>
+        {battleStatus === 'won' ? (
+          <TreasureModal animationFinished={navigateToQuests} />
+        ) : (
+          <GameOverModal animationFinished={navigateToQuests} />
+        )}
+      </Modal>
       <View style={styles.container}>
         <SafeAreaView style={styles.main}>
           <TouchableOpacity style={styles.btn1} onPress={navigation.goBack}>
@@ -236,7 +240,16 @@ const StartBattle = ({navigation, route}) => {
                 onPress={handleButtonPress}
                 style={styles.btn2}
                 resizeMode="contain">
-                <Text style={styles.fight}>{buttonLabel}</Text>
+                {isLoading ? (
+                  <ActivityIndicator animating color="white" />
+                ) : (
+                  <Text
+                    adjustsFontSizeToFit
+                    numberOfLines={1}
+                    style={styles.fight}>
+                    {buttonLabel}
+                  </Text>
+                )}
               </TouchableOpacity>
             )}
           </View>
@@ -296,9 +309,10 @@ const styles = StyleSheet.create({
     margin: 3,
   },
   valueHp: {
-    fontSize: 20,
+    fontSize: 19,
     fontWeight: 'bold',
     margin: 5,
+    fontFamily: 'Poppins-Regular',
   },
   valueHpBug: {
     alignItems: 'center',
@@ -307,6 +321,17 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     transform: [{translateY: 17}],
+  },
+  footer: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 18,
+    flex: 1,
+  },
+  actionSword: {
+    aspectRatio: 1,
+    height: 50,
+    transform: [{translateX: -1}, {scale: 3}],
   },
   containerBattle: {
     flex: 1,
@@ -330,40 +355,34 @@ const styles = StyleSheet.create({
   text: {
     marginRight: 5,
     marginLeft: 5,
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
   textDamage: {
-    fontSize: 16,
+    fontSize: 15,
     marginLeft: 5,
     fontWeight: 'bold',
-  },
-  footer: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 18,
-    flex: 1,
-  },
-  actionSword: {
-    aspectRatio: 1,
-    height: 50,
-    transform: [{translateX: -1}, {scale: 3}],
+    fontFamily: 'Poppins-Regular',
   },
   btn2: {
+    width: 200,
+    height: 55,
     borderRadius: 10,
     backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 15,
     borderColor: 'black',
     borderWidth: 2,
   },
   fight: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     padding: 10,
+    fontFamily: 'Poppins-Regular',
   },
 });

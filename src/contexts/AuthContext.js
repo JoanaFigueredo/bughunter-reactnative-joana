@@ -19,6 +19,21 @@ export const AuthProvider = ({children}) => {
     return response.data;
   };
 
+  const updatedCharacter = async updatedUser => {
+    setIsLoading(true);
+    try {
+      const response = await axios.patch(
+        'https://dws-bug-hunters-api.vercel.app/api/characters/',
+        updatedUser,
+      );
+      setUser(updatedUser);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const chooseCharacter = async characterName => {
     setIsLoading(true);
     if (characterName !== '') {
@@ -45,7 +60,7 @@ export const AuthProvider = ({children}) => {
           atk: 5,
           def: 5,
           agi: 5,
-          hp: 5,
+          hp: 20,
           gold: 100,
           name: characterName,
           factions: [factionSelected],
@@ -63,6 +78,7 @@ export const AuthProvider = ({children}) => {
   };
 
   const create = async ({factionSelected, characterName}) => {
+    setIsLoading(true);
     if (
       characterName !== '' &&
       factionSelected !== '' &&
@@ -82,6 +98,7 @@ export const AuthProvider = ({children}) => {
         'Você precisa digitar um nome e selecionar uma facção pra conseguir logar.',
       );
     }
+    setIsLoading(false);
   };
   return (
     <AuthContext.Provider
@@ -93,6 +110,7 @@ export const AuthProvider = ({children}) => {
         create,
         getCharacters,
         setUser,
+        updatedCharacter,
       }}>
       {children}
     </AuthContext.Provider>

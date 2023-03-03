@@ -40,9 +40,10 @@ const styles = StyleSheet.create({
   },
   description: {
     color: 'white',
-    fontSize: 23,
+    fontSize: 20,
     marginLeft: 10,
     fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular',
   },
   treasureValuePlay: {
     alignItems: 'center',
@@ -63,8 +64,9 @@ const styles = StyleSheet.create({
   },
   value: {
     color: '#F3CC30',
-    fontSize: 24,
+    fontSize: 23,
     fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular',
   },
   play: {
     flexDirection: 'row',

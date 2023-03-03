@@ -18,7 +18,7 @@ import {useAuthContext} from '../contexts/AuthContext';
 const EquipmentsList = ({navigation}) => {
   const {user} = useAuthContext();
   const [filterSelected, setFilterSelected] = useState('all');
-  const [all, setAll] = useState(user.equipment);
+  const [all] = useState(user.equipment);
   const [filtered, setFiltered] = useState(user.equipment);
 
   useEffect(() => {
@@ -105,10 +105,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  logoLabel: {
-    width: 100,
-    height: 80,
-  },
   btn: {
     height: 40,
     width: 40,
@@ -122,10 +118,9 @@ const styles = StyleSheet.create({
     height: 80,
     paddingLeft: '25%',
   },
-  btnLabel: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'white',
+  logoLabel: {
+    width: 100,
+    height: 80,
   },
   equipment: {
     flexDirection: 'row',
@@ -135,8 +130,9 @@ const styles = StyleSheet.create({
   },
   labelEquipament: {
     fontWeight: 'bold',
-    fontSize: 32,
+    fontSize: 30,
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
   scrollFilter: {
     maxHeight: 35,

@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useAuthContext} from '../contexts/AuthContext';
 
 const SignIn = ({navigation}) => {
-  const [characterName, setCharacterName] = useState('planeta');
+  const [characterName, setCharacterName] = useState('');
   const {chooseCharacter, isLoading} = useAuthContext();
 
   return (
@@ -72,11 +72,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: 20,
   },
-  btnLabel: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'white',
-  },
   logo: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -89,6 +84,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 32,
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
   viewSingIn: {
     alignItems: 'flex-start',
@@ -97,8 +93,9 @@ const styles = StyleSheet.create({
   },
   labelViewSingIn: {
     fontWeight: 'bold',
-    fontSize: 45,
+    fontSize: 40,
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
   input: {
     width: '84%',
@@ -112,6 +109,7 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     paddingHorizontal: 10,
+    fontFamily: 'Poppins-Regular',
   },
   btnSingIn: {
     flex: 1,

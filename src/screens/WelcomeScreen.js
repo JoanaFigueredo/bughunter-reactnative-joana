@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -23,15 +23,13 @@ const WelcomeScreen = ({navigation}) => {
           <Text style={styles.textBH}>Bug Hunter</Text>
         </View>
         <View style={styles.containerWelcome}>
-          <Text style={styles.textBemVindo}>
+          <Text style={styles.textWelcome}>
             Bem-vindo <Text style={styles.textBold}>Caçador!</Text>
           </Text>
-          <View>
-            <Text style={styles.text}>
-              Enfrente os bugs mais assustadores que você conseguir encontrar e
-              ganhe as melhores recompensas!{' '}
-            </Text>
-          </View>
+          <Text style={styles.text}>
+            Enfrente os bugs mais assustadores que você conseguir encontrar e
+            ganhe as melhores recompensas!{' '}
+          </Text>
         </View>
         <View style={styles.footer}>
           <MainButton
@@ -55,33 +53,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  logo: {
-    width: 270,
-    height: 135,
-  },
   imagCont: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+  },
+  logo: {
+    width: 270,
+    height: 135,
+  },
+  textBH: {
+    fontWeight: 'bold',
+    fontSize: 32,
+    color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
   containerWelcome: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
   },
-  textBH: {
-    fontWeight: 'bold',
-    fontSize: 32,
-    color: 'white',
-  },
-  textBold: {
-    fontWeight: 'bold',
-  },
-  textBemVindo: {
+  textWelcome: {
     fontSize: 40,
     color: 'white',
     width: 350,
     textAlign: 'center',
+    fontFamily: 'Poppins-Regular',
+  },
+  textBold: {
+    fontWeight: 'bold',
+    fontFamily: 'Poppins-Regular',
   },
   text: {
     fontSize: 14,
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
     width: 350,
     textAlign: 'center',
     marginTop: 15,
+    fontFamily: 'Poppins-Regular',
   },
   footer: {
     flex: 1,

@@ -69,10 +69,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  logoLabel: {
-    width: 100,
-    height: 80,
-  },
   btn: {
     height: 40,
     width: 40,
@@ -85,6 +81,10 @@ const styles = StyleSheet.create({
     width: 100,
     height: 80,
     paddingLeft: '25%',
+  },
+  logoLabel: {
+    width: 100,
+    height: 80,
   },
   btnLabel: {
     fontWeight: 'bold',
@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
   },
   labelQuests: {
     fontWeight: 'bold',
-    fontSize: 32,
+    fontSize: 30,
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
 });
